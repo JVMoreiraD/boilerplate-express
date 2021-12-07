@@ -2,6 +2,15 @@ require('dotenv').config();
 let express = require('express');
 const app = express();
 
+app.use((req, res, next) => {
+    const method = req.method;
+    const path = req.path;
+    const ip = req.ip;
+
+    console.log(`${method} ${path} - ${ip}`);
+    next();
+});
+
 console.log("Hello World")
 
 // app.get("/", function(req, res){
@@ -31,5 +40,7 @@ app.get("/json", function(req,res){
 
     res.json(jsonResponse);
 })
+
+
 
  module.exports = app;
